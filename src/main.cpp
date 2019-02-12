@@ -231,6 +231,7 @@ int main (int argc, char** argv) {
                 return 1;
             }
             header += std::string((std::istreambuf_iterator<char>(headerStream)), std::istreambuf_iterator<char>());
+            headerStream.close();
         }
     }
 
@@ -253,6 +254,8 @@ int main (int argc, char** argv) {
     std::stringstream destStringStream;
     destStringStream << header;
     int numErrors = scribe->scribe(destStringStream, srcStream, vars);
+    // Close srcStream, not needed anymore
+    srcStream.close();
     if (numErrors) {
         cerr << "Scribe " << srcFilename << "> failed: " << numErrors << " errors." << endl;
         return 1;
@@ -325,6 +328,8 @@ int main (int argc, char** argv) {
                 std::getline(headerFile, line);
 
                 previousHeaderStringStream << headerFile.rdbuf();
+                headerFile.close();
+
                 mustOutputHeader = mustOutputHeader || previousHeaderStringStream.str() != headerStringStream.str();
             } else {
                 mustOutputHeader = true;
@@ -340,6 +345,7 @@ int main (int argc, char** argv) {
                     // First line contains the date of modification
                     headerFile << sourceStringStream.str();
                     headerFile << headerStringStream.str();
+                    headerFile.close();
                 } else {
                     cerr << "Scribe output file <" << headerFileName << "> failed to open." << endl;
                     return 1;
@@ -376,6 +382,7 @@ int main (int argc, char** argv) {
                 return 1;
             }
             sourceFile << sourceStringStream.str();
+            sourceFile.close();
         } else {
             cerr << sourceStringStream.str();
         }
@@ -390,6 +397,7 @@ int main (int argc, char** argv) {
             }
 
             destFileStream << destStringStream.str();
+            destFileStream.close();
         } else {
             cerr << destStringStream.str();
         }

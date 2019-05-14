@@ -1,0 +1,24 @@
+Source: hifi-scribe
+Priority: optional
+Maintainer: Seth Alves <seth.alves@gmail.com>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+Section: libs
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Browser: https://salsa.debian.org/debian/hifi-scribe
+#Vcs-Git: https://salsa.debian.org/debian/hifi-scribe.git
+
+Package: hifi-scribe-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: hifi-scribeBROKEN (= ${binary:Version}), ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
+
+Package: hifi-scribeBROKEN
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
